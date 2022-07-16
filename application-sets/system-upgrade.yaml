@@ -21,4 +21,4 @@ spec:
         path: system-upgrade/{{cluster}}
       destination:
         server: '{{url}}'
-        namespace: guestbook
+        namespace: system-upgrade
