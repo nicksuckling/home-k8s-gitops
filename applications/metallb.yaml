@@ -9,19 +9,10 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: charts/network/metallb
+    path: charts/network/metallb/
     repoURL: https://github.com/nicksuckling/home-k8s-gitops.git
     targetRevision: main
-  sync:
-    comparedTo:
-      destination:
-        namespace: kube-system
-        server: https://kubernetes.default.svc
-      source:
-        path: charts/network/metallb
-        repoURL: https://github.com/nicksuckling/home-k8s-gitops.git
-        targetRevision: main
   syncPolicy:
     automated:
-      prune: true
+      prune: false
       selfHeal: true
