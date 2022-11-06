@@ -4,32 +4,35 @@ metadata:
   name: cluster-defaults
 spec:
   generators:
-    - git:
-        repoURL: https://github.com/nicksuckling/home-k8s-gitops.git
-        revision: HEAD
-        files:
-          - path: "charts/cluster-defaults/**/gen-config.json"
-  syncPolicy:
-    preserveResourcesOnDeletion: true
+    # Generator for apps that shold deploy to all clusters
+    - matrix:
+        generators:
+          - clusters: {}
+          - list:
+              elements:
+                - appName: prometheus
+                  namespace: monitoring
   template:
     metadata:
-      name: '{{ name }}'
+      name: "{{name}}-{{appName}}"
       annotations:
-        argocd.argoproj.io/manifest-generate-paths: '/{{ folderPath }}'
+        argocd.argoproj.io/manifest-generate-paths: ".;.."
     spec:
-      project: cluster-critical
+      project: default
       source:
-        path: '{{ folderPath }}'
-        targetRevision: HEAD
         repoURL: https://github.com/nicksuckling/home-k8s-gitops.git
+        targetRevision: HEAD
+        path: charts/cluster-defaults/{{appName}}/
         helm:
+          releaseName: "{{appName}}"
           valueFiles:
             - values.yaml
-            - '{{ valueFile }}'
       destination:
-        namespace: '{{ namespace }}'
-        name: '{{ cluster }}'
+        name: "{{name}}"
+        namespace: "{{namespace}}"
       syncPolicy:
-        #  automated: {}
+        automated:
+          prune: true
+          selfHeal: true
         syncOptions:
-          - ApplyOutOfSyncOnly=true
+          - CreateNamespace=true
