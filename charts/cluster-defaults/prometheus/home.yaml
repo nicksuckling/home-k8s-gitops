@@ -12,7 +12,7 @@ grafana:
 prometheus:
   enabled: true
   ingress:
-    enabled: false
+    enabled: true
     ingressClassName: traefik # This field is required in order for traefik to pickup ingress!
     annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
