@@ -1,0 +1,9 @@
+[
+  {
+    "name": "prometheus-home",
+    "cluster": "home",
+    "namespace": "monitoring",
+    "folderPath": "cluster-defaults/prometheus",
+    "valueFile": "home.yaml"
+  }
+]

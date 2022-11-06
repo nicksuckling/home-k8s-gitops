@@ -1,4 +1,4 @@
-configInline:
+cnfigInline:
   address-pools:
     - name: default
       protocol: layer2

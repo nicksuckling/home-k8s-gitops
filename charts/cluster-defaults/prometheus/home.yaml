@@ -1,0 +1,27 @@
+alertmanager:
+  enabled: false
+  ingress:
+    enabled: false
+    ingressClassName: traefik # This field is required in order for traefik to pickup ingress!
+    annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: web
+    hosts:
+        - alertmanager.megadataloop.com
+grafana:
+  enabled: true
+  ingress:
+    enabled: true
+    ingressClassName: traefik # This field is required in order for traefik to pickup ingress!
+    annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    hosts:
+        - grafana.megadataloop.com
+prometheus:
+  enabled: true
+  ingress:
+    enabled: false
+    ingressClassName: traefik # This field is required in order for traefik to pickup ingress!
+    annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    hosts:
+        - prometheus.megadataloop.com
