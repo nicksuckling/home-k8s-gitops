@@ -3,7 +3,7 @@
     "name": "prometheus-home",
     "cluster": "home",
     "namespace": "monitoring",
-    "folderPath": "cluster-defaults/prometheus",
+    "folderPath": "charts/cluster-defaults/prometheus",
     "valueFile": "home.yaml"
   }
 ]
